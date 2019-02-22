@@ -15,6 +15,10 @@
             <h1 class="display-3">Đăng Ký</h1>
             <hr class="my-2">
         </div>
+        <%if(err) {%> <div class="alert alert-danger" role="alert">
+          <strong><%= err %></strong></div>
+
+          <%} %>
         <form action="/dangky" method="POST">
             <div class="form-group">
               <label for="name">Name</label>

@@ -46,6 +46,9 @@ router.post('/them',function(req,res,next){
 
 router.get('/xoa/:userId',function(req,res,next){
   var userId = ObjectID(req.params.userId);
+  req.session.destroy(function(err){
+    if(err) console.log(err);
+  });
   contact.find({_id:userId}).remove(function(){
     res.redirect('/xem');
   });
@@ -84,9 +87,15 @@ router.post('/avatar/:userId', upload.single('avatar'), function (req, res, next
   }); // executes
 });
 router.get('/dangky',function(req,res,next){
-  res.render('dangki');
+  res.render('dangki',{err:undefined});
 });
 router.post('/dangky',function(req,res,next){
+  contact.find({email:req.body.email},function(err,user){
+    console.log(user[0]);
+    if(user[0]){
+      res.render('dangki',{err:'email đã được dùng để đăng kí'});
+    }
+  });
   bcrypt.hash(req.body.password, null, null, function(err, hash) {
     var user = {
       name:req.body.name,
@@ -97,8 +106,8 @@ router.post('/dangky',function(req,res,next){
     newUser.save(err=>{
       if(err) console.log(err);
     });
+    res.redirect('/dangnhap');
   });
-  res.redirect('/dangnhap');
 });
 router.get('/dangnhap',function(req,res,next){
   res.render('dangnhap',{err:undefined});
@@ -112,12 +121,10 @@ router.post('/dangnhap',function(req,res,next){
       if(user[0]){
         bcrypt.compare(req.body.password, user[0].password, function(err, result) {
           if(result===true) {
-            if(!req.session.password && !req.session.email){
-              req.session.password = user[0].password;
-              req.session.email = user[0].email;
-            }
+            req.session.password = user[0].password;
+            req.session.email = user[0].email;
             res.redirect('xem');
-          }
+            }
           else res.render('dangnhap',{err:'Sai mật khẩu'})
         });
       }
@@ -132,5 +139,9 @@ router.get('/dangxuat',function(req,res,next){
   });
   res.redirect('/dangnhap');
 });
-
+router.get('/check',function(req,res){
+  bcrypt.compare('voducdan', '$2a$10$Q8ESzeJwvn6lntyRYRdSku79Ym2HAq.mS2mBWi82a1dtYRLKz6Qia', function(err, result) {
+    console.log(result);
+  });
+});
 module.exports = router;
