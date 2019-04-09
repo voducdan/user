@@ -13,6 +13,7 @@ var app = express();
 
 // mongoose.connect(process.env.MONGOLAB_URI {useNewUrlParser: true});
 mongoose.connect(process.env.MONGOLAB_URI||'mongodb://localhost:27017/mongoose',{useNewUrlParser: true},function(error){console.log(error)});
+mongoose.Promise = global.Promise;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
