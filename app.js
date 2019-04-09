@@ -12,7 +12,8 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // mongoose.connect(process.env.MONGOLAB_URI {useNewUrlParser: true});
-mongoose.connect('mongodb+srv://voducdan:voducdantiep.1@cluster0-oduju.mongodb.net/user-node-mongoose'|| 'mongodb://localhost:27017/mongoose',{useNewUrlParser:true})
+// mongoose.connect('mongodb+srv://voducdan:voducdantiep.1@cluster0-oduju.mongodb.net/user-node-mongoose'|| 'mongodb://localhost:27017/mongoose',{useNewUrlParser:true})
+mongoose.connect('mongodb://voducdan:voducdantiep.1@cluster0-shard-00-00-oduju.mongodb.net:27017,cluster0-shard-00-01-oduju.mongodb.net:27017,cluster0-shard-00-02-oduju.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{useNewUrlParser:true})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
