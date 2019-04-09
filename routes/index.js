@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/xem',function(req,res,next){
+router.get('/xem',checkLogin.checkLogin,function(req,res,next){
   contact.find(function(err,data){
     res.render('xem',{users:data, email : req.session.email, password:req.session.password});
   }); 
