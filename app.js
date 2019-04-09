@@ -12,7 +12,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // mongoose.connect(process.env.MONGOLAB_URI {useNewUrlParser: true});
-mongoose.connect('mongodb://voducdan:voducdantiep.1@cluster0-shard-00-00-oduju.mongodb.net:27017,cluster0-shard-00-01-oduju.mongodb.net:27017,cluster0-shard-00-02-oduju.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true'|| 'mongodb://localhost:27017/mongoose', function (error) {
+mongoose.connect(process.env.MONGGOLAB_URI|| 'mongodb://localhost:27017/mongoose', function (error) {
   console.log(error)
 });
 mongoose.Promise = global.Promise;
