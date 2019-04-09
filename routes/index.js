@@ -22,7 +22,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/xem',checkLogin.checkLogin,function(req,res,next){
-  console.log(req.session);
   contact.find(function(err,data){
     res.render('xem',{users:data, email : req.session.email, password:req.session.password});
   }); 
@@ -141,7 +140,7 @@ router.get('/dangxuat',function(req,res,next){
 });
 router.get('/check',function(req,res){
   bcrypt.compare('voducdan', '$2a$10$Q8ESzeJwvn6lntyRYRdSku79Ym2HAq.mS2mBWi82a1dtYRLKz6Qia', function(err, result) {
-    console.log(result);
+
   });
 });
 module.exports = router;

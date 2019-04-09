@@ -12,8 +12,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // mongoose.connect(process.env.MONGOLAB_URI {useNewUrlParser: true});
-mongoose.connect(process.env.MONGOLAB_URI|| 'mongodb://localhost:27017/mongoose')
-mongoose.Promise = global.Promise;
+mongoose.connect('mongodb+srv://voducdan:voducdantiep.1@cluster0-oduju.mongodb.net/user-node-mongoose'|| 'mongodb://localhost:27017/mongoose',{useNewUrlParser:true})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
