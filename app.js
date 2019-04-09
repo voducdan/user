@@ -12,7 +12,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // mongoose.connect(process.env.MONGOLAB_URI {useNewUrlParser: true});
-mongoose.connect(process.env.MONGGOLAB_URI|| 'mongodb://localhost:27017/mongoose', function (error) {
+mongoose.connect(process.env.MONGOLAB_URI|| 'mongodb://localhost:27017/mongoose',{useNewUrlParser:true}, function (error) {
   console.log(error)
 });
 mongoose.Promise = global.Promise;
